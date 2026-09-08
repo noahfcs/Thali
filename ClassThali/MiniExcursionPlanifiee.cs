@@ -9,7 +9,7 @@ namespace ClassThali
     {
         // attributs privés
         private string code;
-        private MiniExcursion laMiniExcursion; 
+        private MiniExcursion laMiniExcursion;
         private DateTime heureDepart;
         private int nombreInscrits;
 
@@ -21,7 +21,10 @@ namespace ClassThali
         /// <param name="uneHeure">heure de départ de la mini-excursion</param>
         public MiniExcursionPlanifiee(string unCode, MiniExcursion uneMiniExcursion, DateTime uneHeure)
         {
-            //TODO
+            this.code = unCode;
+            this.laMiniExcursion = uneMiniExcursion;
+            this.heureDepart = uneHeure;
+            this.nombreInscrits = 0;
         }
 
         /// <summary>
@@ -30,8 +33,7 @@ namespace ClassThali
         /// <returns>code de la MEP</returns>
         public string GetCode()
         {
-            //TODO
-            return "";
+            return this.code;
         }
 
         /// <summary>
@@ -40,7 +42,12 @@ namespace ClassThali
         /// <param name="unNombre">Nombre de passagers insrits</param>
         public void SetNombreInscrits(int unNombre)
         {
-            //TODO
+            this.nombreInscrits += unNombre;
+        }
+
+        public int GetNombreInscrits()
+        {
+            return this.nombreInscrits;
         }
 
         /// <summary>
@@ -49,8 +56,11 @@ namespace ClassThali
         /// <returns>true si la mini-excursion est complete, false dans le cas contraire</returns>
         public bool EstComplete()
         {
-            //TODO
-            return true;
+            if (this.nombreInscrits < laMiniExcursion.GetNombrePlaces())
+            {
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -59,9 +69,7 @@ namespace ClassThali
         /// <returns>Date de retour prevue de la MEP</returns>
         public DateTime HeureRetourPrevue()
         {
-            //TODO
-            return new DateTime();
+            return this.heureDepart.AddMinutes(this.laMiniExcursion.DonneDureePrevue());
         }
-  
     }
 }
